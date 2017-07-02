@@ -28,30 +28,9 @@ public class CimMessageListener {
 	{
 		Object cimMessage = record.value();
 		
-		System.out.println("Got CIM Mesage : " + cimMessage + " at offset : " + record.offset());
+		log.info("Got CIM Mesage : " + cimMessage + " at offset : " + record.offset());
 		
 	}
 	
-
-	//@KafkaListener(topics = "mes-topic") //, group = "mesgroup"
-	public void listen(ConsumerRecord<?, ?> record) {
-	//public void listen(String record) {
-		log.info("CimMessageListener() ENTRY message received");
-
-		log.info(record.toString());
-		//countDownLatch1.countDown();
-		
-		log.info("CimMessageListener() EXIT message received");
-	}
-	
-	@KafkaListener(topics = "mes-topic111")
-    public void process(String message/* , Acknowledgment ack */) {
-        //Gson gson = new Gson();
-        //Record record = gson.fromJson(message, Record.class);
-
-        //log.info(record.getId() + " " + record.getName());
-        // ack.acknowledge();
-		log.info("got Message : " + message);
-    }	
 
 }
