@@ -86,6 +86,19 @@ public class LotProcessRepository {
 		        return processIdList.size()>0;		    	
 	    }
 	    
+	    
+	    public String getLotProcessId(String lotId) {
+		    
+		       List<String> processIdList = jdbcTemplate.query(
+		                "SELECT process_id "
+		        		+ " FROM LOT_PROCESS WHERE lot_id = '" + lotId + "' "
+		        		+ " AND status NOT IN ('COMPLETED') ",
+		                (rs, rowNum) -> rs.getString("process_id")
+		        		);
+
+		        return processIdList.get(0);		    	
+	    }	    
+	    
 
 	    @Transactional
 	    public void addProcessJob(String lotId, String processId, String status, String routeId, int seqNo, 

@@ -107,14 +107,15 @@ public class CimService {
 	
 	@RequestMapping(value="/cimservice/getNextEquipmentsForLot", produces = "application/json")
     public @ResponseBody CimTxnResult getNextEquipmentsForLot(@RequestParam(value="user") String user, 
-    								@RequestParam(value="lotId") String lotId,
-    								@RequestParam(value="processId") String processId
+    								@RequestParam(value="lotId") String lotId
     								) {
 		log.info("getNextEquipmentsForLot() ENTRY user : " + user);
 		CimTxnResult retObj = new CimTxnResult();		
 		try
 		{
-			if(!lotProcessRepository.isLotInProcess(lotId, processId))
+			String processId = lotProcessRepository.getLotProcessId(lotId);
+			
+			if(processId==null || !lotProcessRepository.isLotInProcess(lotId, processId))
 			{
 				log.info("Lot <" + lotId + "> is not in any process.");
 				retObj.setTxnResult(-100, "Lot is not in process.", null);
@@ -185,14 +186,14 @@ public class CimService {
 	
 	@RequestMapping(value="/cimservice/getLotNextProcessStep", produces = "application/json")
     public @ResponseBody CimTxnResult getLotNextProcessStep(@RequestParam(value="user") String user, 
-    								@RequestParam(value="lotId") String lotId,
-    								@RequestParam(value="processId") String processId
+    								@RequestParam(value="lotId") String lotId
     								) {
 		log.info("getLotProcessStep() ENTRY user : " + user);
 		CimTxnResult retObj = new CimTxnResult();
 		try
 		{
-			if(!lotProcessRepository.isLotInProcess(lotId, processId))
+			String processId = lotProcessRepository.getLotProcessId(lotId);
+			if(processId == null || !lotProcessRepository.isLotInProcess(lotId, processId))
 			{
 				log.info("Lot <" + lotId + "> is not in any process.");
 				retObj.setTxnResult(-100, "Lot is not in any process.", null);
