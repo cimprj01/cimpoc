@@ -1,0 +1,27 @@
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: false
+    lease:
+      duration: 5
+
+      
+ #Logging
+logging:
+  level:
+    cim.enterprise: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate: ERROR    
+    root: WARN
+    
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+        
+  file: equipmentservice.log
+    

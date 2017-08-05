@@ -1,0 +1,23 @@
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: false
+    lease:
+      duration: 5
+      
+      
+#Database Properties
+spring:
+  jpa:
+    hibernate:
+       ddl: none
+  datasource:
+    url: jdbc:mysql://localhost:3306/CIMDB?useSSL=false
+    username : cimuser
+    password : password
+    

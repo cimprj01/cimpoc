@@ -1,0 +1,58 @@
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: false
+    lease:
+      duration: 5
+
+      
+ #Logging
+logging:
+  level:
+    cim.enterprise: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate: ERROR    
+    root: WARN
+    
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+        
+  file: cim-service.log
+    
+    
+  
+spring:
+  kafka:
+    consumer:
+      bootstrap.servers: "localhost:9093,localhost:9094"
+      acks: "all"      
+      auto-offset-reset: largest
+      group.id: cimgroup
+      enable.auto.commit: true
+      auto.commit.interval.ms: 1000
+      key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      session.timeout.ms: 300000
+      request.timeout.ms: 305000      
+    producer:
+      bootstrap.servers: "localhost:9093,localhost:9094"
+      acks: "all"
+      retries: 0
+      batch.size: 16384
+      linger.ms: 1
+      buffer.memory: 33554432
+      enable.auto.commit: true
+      auto.commit.interval.ms: 1000
+      key.serializer: org.apache.kafka.common.serialization.StringSerializer
+      value.serializer: org.apache.kafka.common.serialization.StringSerializer
+      session.timeout.ms: 300000
+      request.timeout.ms: 30500
+      
+topic:
+  boot: mes-topic
