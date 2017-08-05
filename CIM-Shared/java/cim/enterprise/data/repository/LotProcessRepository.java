@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cim.enterprise.data.LotProcessJob;
+import cim.enterprise.data.ProcessHistory;
 
 @Repository
 public class LotProcessRepository {
@@ -48,6 +49,21 @@ public class LotProcessRepository {
 
 	        return result!=null && result.size()>0?result.get(result.size()-1):null;
 	    }
+	    
+	    public LotProcessJob findAnyProcessJob(String lotId) {
+
+	        List<LotProcessJob> result = jdbcTemplate.query(
+	                "SELECT lot_id, process_id, status, route_id, seq_no, equipment_id,start_time, end_time  "
+	        		+ " FROM LOT_PROCESS_JOB WHERE lot_id = '" + lotId + "' ORDER BY SEQ_NO",
+	                (rs, rowNum) -> new LotProcessJob(rs.getString("lot_id"),
+	                        rs.getString("process_id"), rs.getString("status"), rs.getString("route_id"), 
+	                        rs.getInt("seq_no"), rs.getString("equipment_id"), rs.getDate("start_time"),
+	                        rs.getDate("end_time"), null
+	                        )
+	        		);
+
+	        return result!=null && result.size()>0?result.get(result.size()-1):null;
+	    }	    
 	    
 	    public boolean isLotAtCurrentRoute(String lotId, String processId, String routeId)
 	    {
@@ -127,5 +143,21 @@ public class LotProcessRepository {
 	        		             status, lotId, processId);
 
 	    }
+	    
+	    
+	    public List<ProcessHistory> getLotHistory(String lotId) {
+
+	        List<ProcessHistory> result = jdbcTemplate.query(
+	                "SELECT id, lot_id, tool_id, foup_id, process_id, action_code, route_id, claim_time  "
+	        		+ " FROM PROCESS_HISTORY WHERE lot_id = '" + lotId + "' ORDER BY claim_time",
+	                (rs, rowNum) -> new ProcessHistory(rs.getString("lot_id"),
+	                        rs.getString("tool_id"), rs.getString("foup_id"), rs.getString("action_code"), 
+	                        rs.getDate("claim_time")
+	                        )
+	        		);
+	        
+	        return result;
+
+	    } 	    
 	  	    
 }

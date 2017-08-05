@@ -8,7 +8,6 @@ public class CimTxnInput {
 	
 	private String callType;
 	
-	private String data;
 
 	public String getUserToken() {
 		return userToken;
@@ -33,17 +32,5 @@ public class CimTxnInput {
 	public void setCallType(String callType) {
 		this.callType = callType;
 	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-	
-	
-	
-	
 
 }
