@@ -1,0 +1,48 @@
+ <div class="col-lg-12 animated fadeIn">
+		<div class="card card-accent-info">
+			<div class="card-header">
+				<i class="fa fa-align-justify"></i> Equipment List				 
+			</div>
+			<div class="card-block">
+				<div class="pull-right"><input type="text" id="myInput"  ng-model="search" class="form-control" placeholder="Search.."></div><br/><br/>
+				<table class="table table-bordered table-striped table-condensed">
+					<thead>
+						<tr>
+						   <th>Tool ID</th>
+						   <th class="text-center">Tool Name</th>
+						   <th class="text-center">Equipment Family</th>
+						   <th class="text-center">Lot Family</th>
+						   <th class="text-center">Max Capacity</th>
+						   <th class="text-center">Lot Count</th>
+						   <th class="text-center">Claim Time</th>
+						</tr>
+					</thead>
+					<tbody ng-controller="equipInfoCtrl">
+					  <tr ng-repeat="equipment in equipList | filter:search">
+							  <td>
+							<strong>{{ equipment.toolId }}</strong>
+						   </td>
+						   <td class="text-left">
+							   <div>{{ equipment.toolName }}</div>
+						   </td>
+							<td class="text-center">
+							   <div>{{ equipment.equipmentFamily }}</div>
+						   </td>
+						   <td class="text-center">
+							   <div>{{ equipment.lotFamily }}</div>
+						   </td>
+						   <td class="text-center">
+							   <div>{{ equipment.maxCapacity }}</div>
+						   </td>	
+							<td class="text-center">
+							   <div>{{ equipment.lotCount }}</div>
+						   </td>	
+							<td class="text-center">
+							   <div>{{ equipment.claimTime }}</div>
+						   </td>								   
+						</tr> 
+					</tbody>
+				</table>		   
+		</div>
+	</div>
+</div>

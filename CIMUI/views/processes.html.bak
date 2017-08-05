@@ -1,0 +1,32 @@
+<div class="col-lg-12 animated fadeIn">
+		<div class="card card-outline-info">
+			<div class="card-header">
+				<i class="fa fa-align-justify"></i> Process List				 
+			</div>
+			<div class="card-block">
+				<div class="pull-right"><input type="text" id="myInput"  ng-model="search" class="form-control" placeholder="Search.."></div><br/><br/>
+				<table class="table table-bordered table-striped table-condensed">
+					<thead>
+						<tr>
+						   <th>Process ID</th>
+						   <th class="text-center">Process Name</th>
+						   <th class="text-center">Seq No</th>
+						</tr>
+					</thead>
+					<tbody ng-controller="processInfoCtrl">
+					  <tr ng-repeat="process in processList | filter:search" ng-click="setSelectedProcess();">
+							  <td>
+							<strong>{{ process.processId }}</strong>
+						   </td>
+						   <td class="text-center">
+							   <div>{{ process.processName }}</div>
+						   </td> 
+						   <td class="text-center">
+							   <div>{{ process.seqNo }}</div>
+						   </td>
+					</tr> 
+					</tbody>
+				</table>
+		</div>
+	</div>
+</div>

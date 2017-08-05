@@ -1,0 +1,61 @@
+<div class="animated fadeIn"  ng-controller="processInfoCtrl">
+    <div class="row">  
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i> Process Info
+                </div>				
+                <div class="card-block">
+                    <fieldset class="form-group">
+                        <label>Process ID : </label>
+                        <small class="text-muted">{{processInfo.processId}}</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label>Process Name : </label>
+                        <small class="text-muted">{{processInfo.processName}}</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label>No. Of Routes : </label>
+                        <small class="text-muted">{{processInfo.processRoutes.length}}</small>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+		<h1 style='wdith:100%'></h1>
+        <div class="col-md-3" ng-repeat="processRoute in processInfo.processRoutes">
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i> Process Route #{{$index}}
+                </div>
+                <div class="card-block">
+                    <fieldset class="form-group">
+                        <label>Route ID : </label>
+                        <small class="text-muted">{{processRoute.routeId}}</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label>Route Name : </label>
+                        <small class="text-muted">{{processRoute.routeName}}</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label>Equipment Family : </label>
+                        <small class="text-muted">{{processRoute.equipmentFamily}}</small>
+                    </fieldset>  
+                    <fieldset class="form-group">
+                        <label>Recipe : </label>
+                        <small class="text-muted">{{processRoute.recipe}}</small>
+                    </fieldset>  
+                    <fieldset class="form-group">
+                        <label>Sequence : </label>
+                        <small class="text-muted">{{processRoute.seqNo}}</small>
+                    </fieldset>
+                </div>
+				<div class="pull-right" style="text-align:right">
+					<a type="button" class="btn btn-info active"><i ng-class="!$last ? 'fa fa-arrow-right' : 'fa fa-stop'"></i></a> 
+				</div>
+            </div>
+			
+        </div>		
+    </div>
+    <!-- /.row -->
+</div>

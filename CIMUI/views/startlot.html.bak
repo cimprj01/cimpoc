@@ -1,0 +1,151 @@
+<div class="animated fadeIn"  ng-controller="startLotCtrl">
+<style>
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 10%;
+  height: 30px;
+  background-color: #4CAF50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+</style>
+
+<div id="myProgress" ng-show="false">
+  <div id="myBar">10%</div>
+</div><br/>
+<script>
+function move() {
+  var elem = document.getElementById("myBar");   
+  var width = 10;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+  setTimeout(function() {
+    $('#myBar').fadeOut('fast');
+}, 1500);
+}
+</script>
+<div class="bs-example" ng-show="startLotResult">
+    <div id="myAlert" class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Start Lot Result</strong> {{startLotResultMsg}}.
+		<a type="button" ui-sref="app.lotlist" class="btn btn-info active" ng-click="getLotInfo()">Ok</a>
+    </div>
+</div>
+ <!--<div class="row" ng-show="startLotResult">
+       <!-- /.col 
+        <div class="col-md-6">
+			<div class="card-header">
+                    <i class="fa fa-edit"></i> Start Lot Result
+            </div>        
+            <div class="card">
+ 				<div class="card-block">
+					<span>
+						{{startLotResultMsg}}
+					</span>
+				</div>
+            </div>
+
+        </div>      	
+     </div>-->
+    <div class="row">
+  
+        <!-- /.col -->
+        <div class="col-md-6">
+            <div class="card card-accent-info">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i> Lot Info
+                </div>
+                <div class="card-block">
+                    <fieldset class="form-group">
+                        <label>Lot ID : </label>
+                        <small class="text-muted">{{lotInfo.lotId}}</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label>Lot Name : </label>
+                        <small class="text-muted">{{lotInfo.lotName}}</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label>Lot Family : </label>
+                        <small class="text-muted">{{lotInfo.lotFamily}}</small>
+                    </fieldset>  
+                    <fieldset class="form-group">
+                        <label>Lot Process : </label>
+                        <small class="text-muted">
+                         <span ng-if="lotInfo.lotJobProcess === null">
+					       None
+					     </span>
+					     <span ng-if="lotInfo.lotJobProcess !== null">
+					        {{lotInfo.lotJobProcess.processId}}
+					     </span> 
+                        </small>
+                    </fieldset>  
+                    <fieldset class="form-group">
+                        <label>Foup : </label>
+                        <small class="text-muted">{{lotInfo.foupId}}</small>
+                    </fieldset>  
+                    <fieldset class="form-group">
+                        <label>Wafer Count : </label>
+                        <small class="text-muted">{{lotInfo.waferCount}}</small>
+                    </fieldset>
+					<!--<button type="button" class="btn btn-success" ng-click="startLot()">Start Lot</button>-->
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.col -->
+        
+        <!-- /.col -->
+        <div class="col-md-6" style="display:block">
+            <div class="card card-accent-info">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i> Select the process for lot
+                </div>
+                <div class="card-block">
+				<table class="table table-bordered table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Process ID</th>
+		                       <th class="text-center">Process Name</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-controller="lotListTableCtrl">
+						  <tr ng-repeat="process in processList"  ng-click="setSelectedProcess();">
+                               <td>
+								<strong>{{ process.processId }}</strong>
+		                       </td>
+		                       <td class="text-center">
+		                           <div>{{ process.processName }}</div>
+		                       </td>         
+                   </tr> 
+                        </tbody>
+                    </table>
+		          <button type="button" class="btn btn-success" ng-show="startlotprocess" ng-click="startLot()">Start Lot Process</button>
+				  
+				  <div class="pull-right">
+				  <a type="button" ui-sref="app.lotlist" class="btn btn-info active"><i class="fa fa-mail-reply"></i></a> 
+				  </div>
+                </div>
+            </div>
+
+        </div>       
+        </div>
+       <!-- /.col -->
+	     
+    <!-- /.row -->
+    
+    
+</div>
